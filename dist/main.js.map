@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.js"],"names":["loop","require"],"mappings":";;AAAA,IAAIA,OAAOC,QAAQ,MAAR,CAAX","file":"main.js","sourcesContent":["var loop = require('loop')"]}

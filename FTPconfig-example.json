@@ -1,0 +1,6 @@
+{
+  "host":     "example.com",
+  "user":     "username",
+  "password": "password",
+  "folder":   "drafts"
+}

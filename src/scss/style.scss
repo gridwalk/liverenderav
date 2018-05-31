@@ -1,0 +1,24 @@
+@import "reset";
+@import "ui";
+
+*{
+  box-sizing: border-box;
+  text-size-adjust:none;
+}
+
+body{
+  background-color: #FFF;
+  color:#fff;
+  font-family: monospace;
+  overflow: hidden;
+  width:100vw;
+  height:100vh;
+}
+
+#main{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;  
+}
