@@ -49,12 +49,16 @@ var midi = {
     })
   },
 
-  showActivity:function(cc,val){
+  showActivity:function(cc,val, control){
 
-    console.log('MIDI:',cc,val)
+    // console.log('MIDI:',cc,val)
 
     this._activity.classList.add('active')
-    this._activity.innerHTML = cc+' '+val
+    this._activity.innerHTML = cc+' '+val+' '
+
+    if( control ){
+      this._activity.innerHTML += control.name
+    }
 
     clearTimeout(midi.activityTimer)
     midi.activityTimer = setTimeout(function(){
@@ -167,9 +171,9 @@ var midi = {
     var cc  = e.data[1]
     var val = e.data[2]
 
-    midi.showActivity(cc,val)
-
     var control = midi.knobMap[cc]
+    midi.showActivity(cc,val,control)
+
     if(!control) return
 
     updateState(control.name,val)
@@ -181,9 +185,8 @@ var midi = {
     var cc  = e.data[1]
     var val = e.data[2]
 
-    midi.showActivity(cc,val)
-
     var control = midi.buttonMap[cc]
+    midi.showActivity(cc,val,control)
     if(!control) return
 
     // toggle button value
