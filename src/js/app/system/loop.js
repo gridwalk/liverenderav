@@ -17,13 +17,14 @@ function init() {
   // actors and elements
   frameRate.init()
 
-  exampleActor.init()
+  // exampleActor.init()
+  wavePlane.init()
   
   // start
   loop()
 }
 
-function loop(){
+function loop(ts){
 
   if( state.paused ){ 
     requestAnimationFrame(loop)
@@ -33,7 +34,7 @@ function loop(){
   frameRate.draw()
   autopilot.draw()
 
-  exampleActor.draw()
+  wavePlane.draw(ts)
 
   renderer.render( scene, camera )
 

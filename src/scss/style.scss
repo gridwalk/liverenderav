@@ -1,4 +1,5 @@
 @import "reset";
+@import "codeKeyframes";
 @import "ui";
 
 *{
@@ -7,9 +8,9 @@
 }
 
 body{
-  background-color: #FFF;
+  background-color: #000;
   color:#fff;
-  font-family: monospace;
+  font-family: 'Monaco', monospace;
   overflow: hidden;
   width:100vw;
   height:100vh;

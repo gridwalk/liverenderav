@@ -70,46 +70,25 @@ var controls = [
     key:'U'
   },
   {
-    name:'spinCubeSpeedX',
+    name:'wavePlaneSpeed',
     type:'knob',
     default:1,
-    midiCC:16 ,
+    midiCC:0,
     key:'Q'
   },
   {
-    name:'spinCubeSpeedY',
+    name:'wavePlaneWaveSize',
     type:'knob',
     default:1,
-    midiCC:17 ,
-    key:'W'
-  },
-  {
-    name:'spinCubePosX',
-    type:'knob',
-    default:42,
     midiCC:1,
-    key:'E'
+    key:'Q'
   },
   {
-    name:'spinCubePosY',
+    name:'wavePlaneMagnitude',
     type:'knob',
-    default:52,
-    midiCC:0,
-    key:'R'
-  },
-  {
-    name:'spinCubeScale',
-    type:'knob',
-    default:121,
-    midiCC:18,
-    key:'T'
-  },
-  {
-    name:'wireCubeScale',
-    type:'knob',
-    default:6,
+    default:1,
     midiCC:2,
-    key:'Y'
+    key:'Q'
   },
   {
     name:'boxTransparency',
@@ -117,21 +96,7 @@ var controls = [
     default:'solid',
     midiCC:16,
     key:'T'
-  },
-  {
-    name:'bounceVectorX',
-    type:'knob',
-    default:'3',
-    midiCC:19,
-    // key:'T'
-  },
-  {
-    name:'bounceVectorY',
-    type:'knob',
-    default:'3',
-    midiCC:20,
-    // key:'T'
-  },
+  }
 ]
 
 

@@ -8,7 +8,8 @@ var threeCamera = {
 
     var camera = new THREE.PerspectiveCamera( fov, aspectRatio, nearClip, farClip )
     
-    camera.position.z = 5
+    // camera.position.z = 5
+    camera.position.set(0,50,100)
     
     return camera
   }
