@@ -65,42 +65,42 @@ var controls = [
   {
     name:'autopilotEnabled',
     type:'toggle',
-    default:false,
+    default:true,
     midiCC:4,
     key:'U'
   },
   {
     name:'spinCubeSpeedX',
     type:'knob',
-    default:50,
+    default:1,
     midiCC:16 ,
     key:'Q'
   },
   {
     name:'spinCubeSpeedY',
     type:'knob',
-    default:50,
+    default:1,
     midiCC:17 ,
     key:'W'
   },
   {
     name:'spinCubePosX',
     type:'knob',
-    default:50,
+    default:42,
     midiCC:1,
     key:'E'
   },
   {
     name:'spinCubePosY',
     type:'knob',
-    default:50,
+    default:52,
     midiCC:0,
     key:'R'
   },
   {
     name:'spinCubeScale',
     type:'knob',
-    default:2,
+    default:121,
     midiCC:18,
     key:'T'
   },
@@ -114,8 +114,59 @@ var controls = [
   {
     name:'boxTransparency',
     type:'set',
-    default:'outline',
+    default:'solid',
     midiCC:16,
     key:'T'
   },
+  {
+    name:'bounceVectorX',
+    type:'knob',
+    default:'3',
+    midiCC:19,
+    // key:'T'
+  },
+  {
+    name:'bounceVectorY',
+    type:'knob',
+    default:'3',
+    midiCC:20,
+    // key:'T'
+  },
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+// "wireCubeSpeedY":0
+// "wireCubeSpeedX":42
+// "wireCubeScale":20
+// "boxMax":102
+// "boxMin":72
+// "boxSpeed":121
+// "bgVisible":false
+// "cubeSpeed":77
+// "accentOn":false
+// "chanceAccent":0
+// "accentBlue":253
+// "accentGreen":222
+// "accentRed":0
+// "videoSrc":"synth2.mp4"
+// "cubeFormation":"cluster"
+// "cubeSideDrift":0
+// "cubeFrontDrift":0
+// "cubeTopDrift":8
+// "cubeTransparency":"full"
+// "flickerSpeed":118
+// "fallSpeed":0
+// "scatter":64
+// "width":64
+// "height":93
+// "maxAmount":19

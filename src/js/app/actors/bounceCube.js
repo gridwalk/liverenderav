@@ -28,42 +28,44 @@ var bounceCube = {
   },
   draw:function(){
 
+
+
     // bounce off walls
     if( this.x > window.innerWidth ){
-      this.vectorX = this.vectorX * -1
+      state.bounceVectorX = state.bounceVectorX * -1
       this.x = window.innerWidth
     }
 
     if( this.y > window.innerHeight ){
-      this.vectorY = this.vectorY * -1
+      state.bounceVectorY = state.bounceVectorY * -1
       this.y = window.innerHeight
     }
 
     if( this.x < 0 ){
-      this.vectorX = this.vectorX * -1
+      state.bounceVectorX = state.bounceVectorX * -1
       this.x = 0
     }
 
     if( this.y < 0 ){
-      this.vectorY = this.vectorY * -1
+      state.bounceVectorY = state.bounceVectorY * -1
       this.y = 0
     }
 
-    this.x = this.x + this.vectorX
-    this.y = this.y + this.vectorY
+    this.x = this.x + state.bounceVectorX
+    this.y = this.y + state.bounceVectorY
 
     this.counter++
 
     // go sideways
-    if( chance(10) && chance(1) && this.vectorY !== 0 ){
-      this.prevY   = this.vectorY
-      this.vectorY = 0
+    if( chance(10) && chance(1) && state.bounceVectorY !== 0 ){
+      this.prevY   = state.bounceVectorY
+      state.bounceVectorY = 0
       this.counter = 0
     }
 
     // stop going sideways
-    if( this.vectorY == 0 && this.counter > 100 ){
-      this.vectorY = this.prevY
+    if( state.bounceVectorY == 0 && this.counter > 100 ){
+      state.bounceVectorY = this.prevY
     }
 
     absolutePositionMesh(this.mesh,this.x,this.y)

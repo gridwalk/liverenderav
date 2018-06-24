@@ -1057,42 +1057,42 @@ var controls = [
   {
     name:'autopilotEnabled',
     type:'toggle',
-    default:false,
+    default:true,
     midiCC:4,
     key:'U'
   },
   {
     name:'spinCubeSpeedX',
     type:'knob',
-    default:50,
+    default:1,
     midiCC:16 ,
     key:'Q'
   },
   {
     name:'spinCubeSpeedY',
     type:'knob',
-    default:50,
+    default:1,
     midiCC:17 ,
     key:'W'
   },
   {
     name:'spinCubePosX',
     type:'knob',
-    default:50,
+    default:42,
     midiCC:1,
     key:'E'
   },
   {
     name:'spinCubePosY',
     type:'knob',
-    default:50,
+    default:52,
     midiCC:0,
     key:'R'
   },
   {
     name:'spinCubeScale',
     type:'knob',
-    default:2,
+    default:121,
     midiCC:18,
     key:'T'
   },
@@ -1106,11 +1106,62 @@ var controls = [
   {
     name:'boxTransparency',
     type:'set',
-    default:'outline',
+    default:'solid',
     midiCC:16,
     key:'T'
   },
+  {
+    name:'bounceVectorX',
+    type:'knob',
+    default:'3',
+    midiCC:19,
+    // key:'T'
+  },
+  {
+    name:'bounceVectorY',
+    type:'knob',
+    default:'3',
+    midiCC:20,
+    // key:'T'
+  },
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+// "wireCubeSpeedY":0
+// "wireCubeSpeedX":42
+// "wireCubeScale":20
+// "boxMax":102
+// "boxMin":72
+// "boxSpeed":121
+// "bgVisible":false
+// "cubeSpeed":77
+// "accentOn":false
+// "chanceAccent":0
+// "accentBlue":253
+// "accentGreen":222
+// "accentRed":0
+// "videoSrc":"synth2.mp4"
+// "cubeFormation":"cluster"
+// "cubeSideDrift":0
+// "cubeFrontDrift":0
+// "cubeTopDrift":8
+// "cubeTransparency":"full"
+// "flickerSpeed":118
+// "fallSpeed":0
+// "scatter":64
+// "width":64
+// "height":93
+// "maxAmount":19
 var keyboard = {
 
   // guiTimer:
@@ -1448,6 +1499,45 @@ function saveState(){
 function loadState(){
   if( !localStorage.getItem('state') ) return
   state = JSON.parse(localStorage.getItem('state'))
+
+
+  // pasted from bakeState()
+  state.boxTransparency = 'solid';
+  state.exampleKnob = 1;
+  state.autopilotEnabled = true;
+  state.paused = false;
+  state.spinCubeY = 45;
+  state.spinCubeX = 49;
+  state.spinCubePosY = 52;
+  state.spinCubePosX = 42;
+  state.spinCubeSpeedX = 1;
+  state.spinCubeSpeedY = 0;
+  state.spinCubeScale = 121;
+  state.wireCubeSpeedY = 0;
+  state.wireCubeSpeedX = 42;
+  state.wireCubeScale = 20;
+  state.boxMax = 102;
+  state.boxMin = 72;
+  state.boxSpeed = 121;
+  state.bgVisible = false;
+  state.cubeSpeed = 77;
+  state.accentOn = false;
+  state.chanceAccent = 0;
+  state.accentBlue = 253;
+  state.accentGreen = 222;
+  state.accentRed = 0;
+  state.videoSrc = 'synth2.mp4';
+  state.cubeFormation = 'cluster';
+  state.cubeSideDrift = 0;
+  state.cubeFrontDrift = 0;
+  state.cubeTopDrift = 8;
+  state.cubeTransparency = 'full';
+  state.flickerSpeed = 118;
+  state.fallSpeed = 0;
+  state.scatter = 64;
+  state.width = 64;
+  state.height = 93;
+  state.maxAmount = 19;
 }
 
 function updateState(param,val){
@@ -1458,6 +1548,14 @@ function updateState(param,val){
 function toggleState(param){
   state[param] = !state[param]
   saveState()
+}
+
+function bakeState(){
+  var declarations = ''
+  for (var controlName in state) {
+    declarations += "state."+controlName +" = "+state[controlName]+";\n"
+  }
+  console.log(declarations)
 }
 
 
@@ -1497,42 +1595,44 @@ var bounceCube = {
   },
   draw:function(){
 
+
+
     // bounce off walls
     if( this.x > window.innerWidth ){
-      this.vectorX = this.vectorX * -1
+      state.bounceVectorX = state.bounceVectorX * -1
       this.x = window.innerWidth
     }
 
     if( this.y > window.innerHeight ){
-      this.vectorY = this.vectorY * -1
+      state.bounceVectorY = state.bounceVectorY * -1
       this.y = window.innerHeight
     }
 
     if( this.x < 0 ){
-      this.vectorX = this.vectorX * -1
+      state.bounceVectorX = state.bounceVectorX * -1
       this.x = 0
     }
 
     if( this.y < 0 ){
-      this.vectorY = this.vectorY * -1
+      state.bounceVectorY = state.bounceVectorY * -1
       this.y = 0
     }
 
-    this.x = this.x + this.vectorX
-    this.y = this.y + this.vectorY
+    this.x = this.x + state.bounceVectorX
+    this.y = this.y + state.bounceVectorY
 
     this.counter++
 
     // go sideways
-    if( chance(10) && chance(1) && this.vectorY !== 0 ){
-      this.prevY   = this.vectorY
-      this.vectorY = 0
+    if( chance(10) && chance(1) && state.bounceVectorY !== 0 ){
+      this.prevY   = state.bounceVectorY
+      state.bounceVectorY = 0
       this.counter = 0
     }
 
     // stop going sideways
-    if( this.vectorY == 0 && this.counter > 100 ){
-      this.vectorY = this.prevY
+    if( state.bounceVectorY == 0 && this.counter > 100 ){
+      state.bounceVectorY = this.prevY
     }
 
     absolutePositionMesh(this.mesh,this.x,this.y)
