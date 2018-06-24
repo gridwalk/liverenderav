@@ -7,6 +7,7 @@ function init() {
   keyboard.init()
   autopilot.init()
   mouse.init()
+  audioPlayer.init()
   
   // Three JS Scene
   window.scene    = threeScene.init()
@@ -16,11 +17,7 @@ function init() {
   // actors and elements
   frameRate.init()
 
-  wireCube.init()
-  spinCube.init()
-  // clusterCubes.init()
-  bounceCube.init()
-  mouseCube.init()
+  exampleActor.init()
   
   // start
   loop()
@@ -36,11 +33,7 @@ function loop(){
   frameRate.draw()
   autopilot.draw()
 
-  spinCube.draw()
-  // clusterCubes.draw()
-  wireCube.draw()
-  bounceCube.draw()
-  mouseCube.draw()
+  exampleActor.draw()
 
   renderer.render( scene, camera )
 

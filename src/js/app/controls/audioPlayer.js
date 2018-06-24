@@ -1,0 +1,7 @@
+var audioPlayer = {
+  init:function(){
+
+    
+
+  }
+}

@@ -26,13 +26,13 @@ var paths = {
     actors:   './src/js/app/actors/**/*',
     system:   './src/js/app/system/**/*',
   },
-  images:   './src/img/**/*',
+  assets:   './src/assets/**/*',
 	pages:    './src/html/**/*',
 	dist:     './dist'
 }
 
 // these tasks execute in order when you run gulp
-gulp.task('default', ['styles', 'scripts', 'images', 'html', 'serve',	'watch', 'livereload-listen',	'open'])
+gulp.task('default', ['styles', 'scripts', 'assets', 'html', 'serve',	'watch', 'livereload-listen',	'open'])
 
 
 /*
@@ -116,8 +116,9 @@ gulp.task('lint',function(){
 		])
 		.pipe(plumber())
 		.pipe(jshint({
-			'asi':true, // allows missing semicolons
-			'sub':true  // allows bracket reference of array items
+			'asi':      true, // allows missing semicolons
+			'sub':      true, // allows bracket reference of array items,
+      'loopfunc': true  // allows functions declared inside loop
 		}))
 		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(notify(function (file) {  // Use gulp-notify as jshint reporter
@@ -147,7 +148,7 @@ gulp.task('lint',function(){
 // just copies HTML to the dist folder, no compilation step
 // this exists to gain the benefit of livereload when editing pages
 
-gulp.task('html',['styles','images'], function () {
+gulp.task('html',['styles','assets'], function () {
 	return gulp.src(paths.pages)
 		.pipe(gulp.dest(paths.dist))
 		.pipe(livereload())
@@ -155,21 +156,21 @@ gulp.task('html',['styles','images'], function () {
 
 /*
 
-██╗ ███╗   ███╗  █████╗   ██████╗  ███████╗ ███████╗
-██║ ████╗ ████║ ██╔══██╗ ██╔════╝  ██╔════╝ ██╔════╝
-██║ ██╔████╔██║ ███████║ ██║  ███╗ █████╗   ███████╗
-██║ ██║╚██╔╝██║ ██╔══██║ ██║   ██║ ██╔══╝   ╚════██║
-██║ ██║ ╚═╝ ██║ ██║  ██║ ╚██████╔╝ ███████╗ ███████║
-╚═╝ ╚═╝     ╚═╝ ╚═╝  ╚═╝  ╚═════╝  ╚══════╝ ╚══════╝
-
+ █████╗ ███████╗███████╗███████╗████████╗███████╗
+██╔══██╗██╔════╝██╔════╝██╔════╝╚══██╔══╝██╔════╝
+███████║███████╗███████╗█████╗     ██║   ███████╗
+██╔══██║╚════██║╚════██║██╔══╝     ██║   ╚════██║
+██║  ██║███████║███████║███████╗   ██║   ███████║
+╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+                                                 
 ****************************************************/
 
-// just copies images to the dist folder, no processing
-// this exists to gain the benefit of livereload when changing images
+// just copies assets to the dist folder, no processing
+// this exists to gain the benefit of livereload when changing assets
 
-gulp.task('images', function(){
-	return gulp.src(paths.images,{base:'./src/img/'})
-	.pipe(gulp.dest(paths.dist+'/img'))
+gulp.task('assets', function(){
+	return gulp.src(paths.assets,{base:'./src/assets/'})
+	.pipe(gulp.dest(paths.dist+'/assets'))
 	.pipe(livereload())
 })
 
@@ -248,8 +249,8 @@ gulp.task('watch',['serve'], function(){
 		gulp.start('html')
 	})
 
-	watch(paths.images,function(){
-		gulp.start('images')
+	watch(paths.assets,function(){
+		gulp.start('assets')
 	})
 	
 })
