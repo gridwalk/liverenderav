@@ -19,6 +19,7 @@ function init() {
 
   // exampleActor.init()
   wavePlane.init()
+  popCube.init()
   
   // start
   loop()
@@ -35,6 +36,7 @@ function loop(ts){
   autopilot.draw()
 
   wavePlane.draw(ts)
+  popCube.draw()
 
   renderer.render( scene, camera )
 
