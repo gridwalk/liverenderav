@@ -1,12 +1,13 @@
-#info{
+#about{
   position: absolute;
-  right: 3px;
-  bottom: 3px;
+  bottom: 0px;
+  left: 0;
   z-index: 100;
   font-size: 10px;
   background-color: #000;
   color:#fff;
   text-decoration: none;
+  width: 120px;
   &:hover{
     text-decoration: underline;
   }

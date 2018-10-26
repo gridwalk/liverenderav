@@ -174,9 +174,15 @@ var midi = {
     var control = midi.knobMap[cc]
     midi.showActivity(cc,val,control)
 
-    if(!control) return
+    if(!control){
 
-    updateState(control.name,val)
+      // fall back to button press if there is no knob.
+      // sometimes a controller doesnt register buttons as "notes"
+      midi.buttonPress(e)
+
+    }
+
+    st.set(control.name,val)
 
   },
 
@@ -189,14 +195,21 @@ var midi = {
     midi.showActivity(cc,val,control)
     if(!control) return
 
+    // avoid double toggling
+    if( val == 0 ) return
+
     // toggle button value
     if( control.type == 'toggle' ){
-      toggleState(control.name)
+      st.set(control.name, !state[controlName])
     }
 
     // set value on button press
     if( control.type == 'set' ){
-      updateState(control.name, control.default)
+      st.set(control.name, control.default)
+    }
+
+    if( control.type == 'run' ){
+      control.run()
     }
 
   }

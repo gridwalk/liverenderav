@@ -1,19 +1,67 @@
 @import "reset";
-@import "codeKeyframes";
 @import "ui";
+@import "codeKeyframes";
 
 *{
   box-sizing: border-box;
   text-size-adjust:none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body{
-  background-color: #000;
+  background: linear-gradient(-45deg, orange 0%, red 100%);
+  background: #000;
   color:#fff;
-  font-family: 'Monaco', monospace;
+  font-family: 'monaco', monospace;
   overflow: hidden;
   width:100vw;
   height:100vh;
+
+  &.white{
+    background-color: #fff;
+  }
+
+  &.fade{
+    animation-name: fade;
+    animation-duration: 15s;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+    animation-direction: alternate;
+    animation-fill-mode:both;
+
+    @keyframes fade {
+      from {
+        background-color: #000;
+      }
+
+      to {
+        background-color: #fff;
+      }
+    }  
+  }
+
+  &.purple-fade{
+    animation-name: purplefade;
+    animation-duration: 2s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-direction: alternate;
+    animation-fill-mode:both;
+
+    @keyframes purplefade {
+      from {
+        background-color: #000;
+      }
+
+      to {
+        background-color: #6025d4;
+      }
+    }
+  }
+  
 }
 
 #main{
@@ -22,4 +70,63 @@ body{
   position: absolute;
   top: 0;
   left: 0;  
+}
+
+#ckf-editor{
+  opacity: .9;
+}
+
+.intro{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1;
+	flex-direction: column;
+
+	span{
+		font-size: 13px;
+		position: relative;
+		margin-bottom: 10px;
+		&:after{
+			content:'';
+			position: absolute;
+			left: -5%;
+			top: 3px;
+			width: 110%;
+			height: 8px;
+			background-color: #000;
+			z-index: -1;
+		}
+	}
+}
+
+
+button{
+	display: none;
+	appearance:none;
+	border:1px solid #6025d4;
+	color:#6025d4;
+	background-color: rgba(0,0,0, .6);
+	padding: 20px 80px;
+	border-radius: 3px;
+	font-size: 14px;
+	margin-bottom: 20px;
+	font-family:inherit;
+	font-weight: bold;
+	cursor: pointer;
+	transition:.6s all linear;
+	
+
+	&:active,&:focus{
+		outline:0;
+	}
+	&:hover{
+		color:#fff;
+		border-color:#fff;
+	}
 }

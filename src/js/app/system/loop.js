@@ -1,31 +1,36 @@
-function init() {
+function initLoop() {
   
   // controls and data
-  loadState()
+  st.load()
   midi.init()
   initControls()
-  keyboard.init()
-  autopilot.init()
+  // autopilot.init()
   mouse.init()
-  audioPlayer.init()
-  
+  keyboard.init()
+  // audioPlayer.init()
+  frameRate.init()
+
   // Three JS Scene
   window.scene    = threeScene.init()
   window.camera   = threeCamera.init()
   window.renderer = threeRenderer.init()
 
-  // actors and elements
-  frameRate.init()
+  // actors
 
-  // exampleActor.init()
-  wavePlane.init()
-  popCube.init()
+  wireCube.init()
+  // spinCube.init()
+  // clusterCubes.init()
+  // bounceCube.init()
+  // mouseCube.init()
+  // freeCube.init()
+  // planes.init()
+  // sphere.init()
   
   // start
   loop()
 }
 
-function loop(ts){
+function loop(){
 
   if( state.paused ){ 
     requestAnimationFrame(loop)
@@ -33,14 +38,28 @@ function loop(ts){
   }
 
   frameRate.draw()
-  autopilot.draw()
+  // autopilot.draw()
 
-  wavePlane.draw(ts)
-  popCube.draw()
+  threeCamera.draw()
+
+  // spinCube.draw()
+  // clusterCubes.draw()
+  wireCube.draw()
+  // bounceCube.draw()
+  // mouseCube.draw()
+  // freeCube.draw()
+  // planes.draw()
+  // sphere.draw()
+
+  st.interpolator.draw()
+
+  if( !state.trails ){
+    renderer.clear()
+  }
 
   renderer.render( scene, camera )
 
   requestAnimationFrame(loop)
 }
 
-init()
+initLoop()

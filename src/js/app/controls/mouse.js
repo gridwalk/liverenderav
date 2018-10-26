@@ -1,7 +1,9 @@
 var mouse = {
 
-  x:-100,
-  y:-100,
+  x:-9999999,
+  y:-9999999,
+  percentY:-50,
+  percentX:-50,
 
   init:function(){
 
@@ -11,19 +13,23 @@ var mouse = {
 
     document.addEventListener('mousemove',function(e){
       
+      // renderer.clear()
+
       mouse.x = e.clientX
       mouse.y = e.clientY
+
+      mouse.percentX = (((e.clientX / window.innerWidth) - 1) * -1)
+      mouse.percentY = (((e.clientY / window.innerHeight) - 1) * -1)
 
       // move slider
       if( keyboard.activeControl ){
 
         // slider style
-        var percent = (((e.clientY / window.innerHeight) - 1) * -1)
-        window.slider.style.height = (percent*100)+"%"
+        window.slider.style.height = (mouse.percentY*100)+"%"
 
         // update control
-        var controlY = Math.floor(percent * 127)
-        updateState(keyboard.activeControl,controlY)
+        var controlY = Math.floor( mouse.percentY * 127)
+        st.set(keyboard.activeControl,controlY,.05)
 
       }
 

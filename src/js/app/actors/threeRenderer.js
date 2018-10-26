@@ -6,7 +6,7 @@ var threeRenderer = {
       // premultipliedAlpha: true
       // antialias: true,
       // stencil: true
-      // preserveDrawingBuffer: true
+      preserveDrawingBuffer: true
       // depth: true
       // logarithmicDepthBuffer: false
     })

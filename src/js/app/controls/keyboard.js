@@ -55,12 +55,12 @@ var keyboard = {
 
       // do the control (toggle)
       if( control.type == 'toggle' ){
-        toggleState(control.name)
+      	st.set( control.name, !state[control.name] )
       }
 
       // do the control (set)
       if( control.type == 'set' ){
-        updateState(control.name, control.default)
+      	st.set(control.name, control.default)
       }
 
       // output the control name to the screen
@@ -75,6 +75,3 @@ var keyboard = {
   }
 
 }
-
-
-

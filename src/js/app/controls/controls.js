@@ -1,3 +1,280 @@
+
+// the main point of control variables is that 
+// they are automatically saved in the state object variable when changed
+
+// Once controls are registered here, there are 4 ways to update them:
+// 1. st.set('controlName','newvalue')
+// 2. use MIDI knob or button with the midiCC you assigned to it below
+// 3. Press the key on your keyboard you assigned to it
+// 4. If control is a knob, hold the key and move the mouse up/down
+
+// Four types of controls:
+// toggle - toggles a state variable true/false
+// knob   - allows a state variable to be controlled by a MIDI knob values 0 - 127
+// set    - sets a state variable to the given "default" value
+// run    - runs arbitrary code. Does not save anything to state!!
+
+var controls = [
+
+  // systems
+  {
+    name:'autopilotEnabled',
+    type:'toggle',
+    default:false,
+    midiCC:4,
+    // key:'U'
+  },
+  {
+    name:'pasteState',
+    type:'run',
+    run:function(){
+      audioPlayer._pasteState.click()
+    },
+    midiCC:null,
+    // key:null,
+  },
+
+  // general vis
+
+  {
+    name:'trails',
+    type:'toggle',
+    default:false,
+    midiCC:46,
+    key:'T'
+  },
+
+  {
+    name:'cameraPanX',
+    type:'knob',
+    default:64,
+    // midiCC:46,
+    // key:'C'
+  },
+  {
+    name:'cameraPanY',
+    type:'knob',
+    default:64,
+    // midiCC:46,
+    // key:'C'
+  },
+
+  // spin cube
+
+  {
+    name:'spinCubeSpeedX',
+    type:'knob',
+    default:1,
+    midiCC:16 ,
+    // key:'Q'
+  },
+  {
+    name:'spinCubeSpeedY',
+    type:'knob',
+    default:1,
+    midiCC:17 ,
+    // key:'W'
+  },
+  {
+    name:'spinCubePosX',
+    type:'knob',
+    default:50,
+    midiCC:1,
+    // key:'E'
+  },
+  {
+    name:'spinCubePosY',
+    type:'knob',
+    default:50,
+    midiCC:0,
+    // key:'R'
+  },
+  {
+    name:'spinCubeScale',
+    type:'knob',
+    default:30,
+    midiCC:18,
+    // key:'T'
+  },
+
+  // wire cube
+
+  {
+    name:'wireCubeScale',
+    type:'knob',
+    default:5,
+    midiCC:2,
+    // key:'Y'
+  },
+  {
+    name:'wireCubeRotX',
+    type:'knob',
+    default:1,
+    // midiCC:2,
+    // key:'Y'
+  },
+  {
+    name:'wireCubeRotY',
+    type:'knob',
+    default:1,
+    // midiCC:2,
+    // key:'Y'
+  },
+
+  // wire clones 
+  {
+    name:'numWireClones',
+    type:'knob',
+    default:30,
+    // midiCC:2,
+    key:'N'
+  },
+
+  {
+    name:'wireCubeCloneScale',
+    type:'knob',
+    default:10,
+    // midiCC:2,
+    key:'C'
+  },
+
+  {
+    name:'wireCubeCloneRotOff',
+    type:'knob',
+    default:0,
+    // midiCC:2,
+    key:'R'
+  },
+
+
+  // sphere
+
+  {
+    name:'sphereRotX',
+    type:'knob',
+    default:8,
+    // midiCC:2,
+    // key:'Y'
+  },
+  {
+    name:'sphereRotY',
+    type:'knob',
+    default:0,
+    // midiCC:2,
+    // key:'Y'
+  },
+  {
+    name:'sphereScale',
+    type:'knob',
+    default:5,
+    midiCC:2,
+    // key:'Y'
+  },
+  {
+    name:'sphereFlicker',
+    type:'toggle',
+    default:true,
+    midiCC:32,
+    // key:''
+  },
+  
+  // bounce cube
+
+  {
+    name:'bounceCubeVectorX',
+    type:'knob',
+    default:0,
+    midiCC:23,
+    // key:''
+  },
+  {
+    name:'bounceCubeVectorY',
+    type:'knob',
+    default:0,
+    midiCC:7,
+    // key:''
+  },
+  {
+    name:'bounceCubeScale',
+    type:'knob',
+    default:0,
+    midiCC:22,
+    // key:''
+  },
+  {
+    name:'bounceCubeFlicker',
+    type:'toggle',
+    default:false,
+    midiCC:32,
+    // key:''
+  },
+  {
+    name:'bounceCubeRotX',
+    type:'knob',
+    default:0,
+    midiCC:null,
+    // key:''
+  },
+  {
+    name:'bounceCubeRotY',
+    type:'knob',
+    default:0,
+    midiCC:null,
+    // key:''
+  },
+
+
+  // free cube
+  {
+    name:'freeCubePosX',
+    type:'knob',
+    default:50,
+    // midiCC:23,
+    // key:''
+  },
+  {
+    name:'freeCubePosY',
+    type:'knob',
+    default:50,
+    // midiCC:23,
+    // key:''
+  },
+
+  // planes
+  {
+    name:'planesShowRandom',
+    type:'run',
+    run:function(){
+      planes.hideAll()
+      planes.showRandom()
+    },
+    // key:'P'
+  },
+  {
+    name:'planesRotXY',
+    type:'knob',
+    default:0,
+    midiCC:6,
+    // key:''
+  },
+  {
+    name:'planesDepth',
+    type:'knob',
+    default:10,
+    midiCC:5,
+    // key:''
+  },
+  {
+    name:'planesZ',
+    type:'knob',
+    default:63,
+    midiCC:3,
+    // key:''
+  }
+
+]
+
+
 var initControls = function(){
 
   // step through all controls,
@@ -8,7 +285,8 @@ var initControls = function(){
     var control = controls[i]
 
     // set defaults for controls that dont have state yet
-    if( state[ control.name ] == undefined ){
+    if( state[ control.name ] == undefined && control.default !== undefined ){
+
       state[ control.name ] = control.default
     }
     
@@ -18,14 +296,8 @@ var initControls = function(){
 
     // generate MIDI and Keyboard maps
     
-    // button map (toggle)
-    if( type == 'toggle' ){
-      midi.buttonMap[cc]     = control
-      keyboard.inputMap[key] = control
-    }
-
-    // button map (set value)
-    if( type == 'set' ){
+    // button map (toggle, set, run)
+    if( type == 'toggle' || type == 'set' || type == 'run' ){
       midi.buttonMap[cc]     = control
       keyboard.inputMap[key] = control
     }
@@ -38,9 +310,11 @@ var initControls = function(){
 
   }
 
-  saveState()
+  st.save()
 
 }
+
+// list of midi mapping on livid cntrl r
 
 // x  x  x  x   x  x  x  x   x  x  x  x
 // x  x  x  x   x  x  x  x   x  x  x  x
@@ -51,87 +325,3 @@ var initControls = function(){
 // |  |  |  |   3  7  11 15  |  |  |  |
 // 16 17 18 19  20 21 22 23  24 25 26 27
 // 28 29 30 31  32 33 34 35  36 37 38 39
-
-// list of all possible controls
-
-var controls = [
-  {
-    name:'paused',
-    type:'toggle',
-    default:false,
-    midiCC:0,
-    key:' '
-  },
-  {
-    name:'autopilotEnabled',
-    type:'toggle',
-    default:true,
-    midiCC:4,
-    key:'U'
-  },
-  {
-    name:'wavePlaneSpeed',
-    type:'knob',
-    default:1,
-    midiCC:0,
-    key:'Q'
-  },
-  {
-    name:'wavePlaneWaveSize',
-    type:'knob',
-    default:1,
-    midiCC:1,
-    key:'Q'
-  },
-  {
-    name:'wavePlaneMagnitude',
-    type:'knob',
-    default:1,
-    midiCC:2,
-    key:'Q'
-  },
-  {
-    name:'boxTransparency',
-    type:'set',
-    default:'solid',
-    midiCC:16,
-    key:'T'
-  }
-]
-
-
-
-
-
-
-
-
-
-
-
-
-// "wireCubeSpeedY":0
-// "wireCubeSpeedX":42
-// "wireCubeScale":20
-// "boxMax":102
-// "boxMin":72
-// "boxSpeed":121
-// "bgVisible":false
-// "cubeSpeed":77
-// "accentOn":false
-// "chanceAccent":0
-// "accentBlue":253
-// "accentGreen":222
-// "accentRed":0
-// "videoSrc":"synth2.mp4"
-// "cubeFormation":"cluster"
-// "cubeSideDrift":0
-// "cubeFrontDrift":0
-// "cubeTopDrift":8
-// "cubeTransparency":"full"
-// "flickerSpeed":118
-// "fallSpeed":0
-// "scatter":64
-// "width":64
-// "height":93
-// "maxAmount":19
