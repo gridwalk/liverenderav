@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>https://brokenscreen.online</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width"> 
+
+  <!-- Open Graph tags for social media -->
+  <meta property="og:title" content="https://brokenscreen.online">
+  <meta property="og:description" content="Part screen-saver part screen unsaved. https://brokenscreen.online is an abstract live render artpiece made with JavaScript. The scene consists of four actors. Four cubes- two wireframe and two opaque. The wire cubes slowly form patterns in the background as the opaque cubes leave a trail of pixels wherever they go. Made with LiveRender AV, an audiovisual framework created by the artist, Three.js and WebMIDI.js.">
+  <meta property="og:image" content="https://brokenscreen.online/img/poster.png">
+  <meta property="og:url" content="https://brokenscreen.online">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:site_name" content="https://brokenscreen.online">
+  
+  <style>
+    body{
+      background-color: #000;
+      
+      
+      font-size: 13px;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .about{
+      position: fixed;
+      width: calc(100vw - 60px);
+      height: calc(100vh - 60px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+      left: 30px;
+      top: 30px;
+      z-index: 1;
+    }
+
+    a{
+      color:#fff;
+    }
+
+    p{
+      margin-bottom: 1em;
+      line-height: 1.4em;
+      max-width: 350px;
+    }
+
+
+
+  </style>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//analytics.donaldhanson.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', '1']);
+      _paq.push(['enableHeartBeatTimer']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+
+</head>
+
+<body>
+    <div class="about">
+      <div>
+        <p><a href="https://brokenscreen.online">https://brokenscreen.online</a></p>
+        <p><a href="https://donaldhanson.net">Donald Hanson</a>, 2018</p>
+        <p>Part screen-saver part screen unsaved. https://brokenscreen.online is an abstract live render artpiece made with JavaScript. The scene consists of four actors. Four cubes- two wireframe and two opaque. The wire cubes slowly form patterns in the background as the opaque cubes leave a trail of pixels wherever they go. Made with <a href="https://github.com/gridwalk/liverenderav">LiveRender AV</a>, an audiovisual framework created by the artist, Three.js and WebMIDI.js.</p>
+        <p>Available for live performance as a VJ/AV set. Domain/artpiece available for purchase from the artist.</p>
+      </div>
+    </div>
+    <div class="container" id="main"></div>
+    <script src='main.js'></script>
+</body>
+</html>
